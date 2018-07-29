@@ -73,16 +73,22 @@ public class DBfunctions {
 
 	}
 
-	public void createTODO(String userEmail, String TODOmessage) throws ClassNotFoundException, SQLException {
+	public void createTODO(String userEmail, String TODOmessage,int status) throws ClassNotFoundException, SQLException {
 		establishConnection();
-		PreparedStatement preparedStatement = connection.prepareStatement("insert into todos values " + "(?,?)");
+		PreparedStatement preparedStatement = connection.prepareStatement("insert into todos values " + "(?,?,?,0)");
 		preparedStatement.setString(1, userEmail);
 		preparedStatement.setString(2, TODOmessage);
+		preparedStatement.setInt(3, 0);
 		preparedStatement.executeUpdate();
 	}
 
-	public void updateTODO(int todo_id, boolean status) {
-
+	public void updateTODO(int status,String userEmail,String TODOmessage) throws ClassNotFoundException, SQLException {
+		establishConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement("update todos set status =? where email=? and todo_desc=?;");
+		preparedStatement.setInt(1, status);
+		preparedStatement.setString(2, userEmail);
+		preparedStatement.setString(3, TODOmessage);
+		preparedStatement.executeUpdate();
 	}
 
 }

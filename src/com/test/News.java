@@ -16,12 +16,14 @@ public class News extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("You are at news servelet");
+		// response.getWriter().append("You are at news servelet");
+		response.setContentType("application/json");
+		response.getWriter().append("{\"property\":\"data\"}");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }
